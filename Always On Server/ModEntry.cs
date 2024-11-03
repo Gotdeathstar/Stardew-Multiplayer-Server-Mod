@@ -238,8 +238,6 @@ namespace Always_On_Server
                         Game1.addHUDMessage(new HUDMessage("Server Mode On!"));
 
                         Game1.options.pauseWhenOutOfFocus = false;
-                        // store levels, set in game levels to max
-                        var data = this.Helper.Data.ReadJsonFile<ModData>($"data/{Constants.SaveFolderName}.json") ?? new ModData();
                         Game1.addHUDMessage(new HUDMessage("Server Mode COMPLETE!"));
                     }
                     else
@@ -444,12 +442,6 @@ namespace Always_On_Server
                 foreach (var pair in Game1.player.friendshipData.FieldDict)
                     this.PreviousFriendships[pair.Key] = pair.Value.Value.Points;
             }
-
-
-
-
-
-
 
             //eggHunt event
             if (eggHuntAvailable && Game1.CurrentEvent != null && Game1.CurrentEvent.isFestival)
@@ -1253,9 +1245,6 @@ namespace Always_On_Server
         {
             if (currentTime >= 900 && currentTime <= 1400)
             {
-
-
-
                 //teleports to egg festival
                 Game1.netReady.SetLocalReady("festivalStart", true);
                 Game1.activeClickableMenu = new ReadyCheckDialog("festivalStart", true, who =>
@@ -1270,7 +1259,6 @@ namespace Always_On_Server
             }
             else if (currentTime >= 1410)
             {
-
                 eggHuntAvailable = false;
                 Game1.options.setServerMode("online");
                 eggHuntCountDown = 0;
