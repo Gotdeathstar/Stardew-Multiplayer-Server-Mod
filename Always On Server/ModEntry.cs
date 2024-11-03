@@ -119,11 +119,6 @@ namespace Always_On_Server
             helper.Events.Specialized.UnvalidatedUpdateTicked += OnUnvalidatedUpdateTick; //used bc only thing that gets throug save window
         }
 
-
-
-
-
-
         /// <summary>Raised after the player loads a save slot and the world is initialised.</summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event data.</param>
@@ -132,44 +127,11 @@ namespace Always_On_Server
             // turns on server after the game loads
             if (Game1.IsServer)
             {
-                // store levels, set in game levels to max
-                var data = this.Helper.Data.ReadJsonFile<ModData>($"data/{Constants.SaveFolderName}.json") ?? new ModData();
-
-                // Skill numbers
-                int FarmingSkillNumber = Farmer.getSkillNumberFromName("farming");
-                int MiningSkillNumber = Farmer.getSkillNumberFromName("mining");
-                int ForagingSkillNumber = Farmer.getSkillNumberFromName("foraging");
-                int FishingSkillNumber = Farmer.getSkillNumberFromName("fishing");
-                int CombatSkillNumber = Farmer.getSkillNumberFromName("combat");
-
-                // Levels
-                data.FarmingLevel = Game1.player.FarmingLevel;
-                data.MiningLevel = Game1.player.MiningLevel;
-                data.ForagingLevel = Game1.player.ForagingLevel;
-                data.FishingLevel = Game1.player.FishingLevel;
-                data.CombatLevel = Game1.player.CombatLevel;
-
-                //Experience
-                data.FarmingExperience = Game1.player.experiencePoints[FarmingSkillNumber];
-                data.MiningExperience = Game1.player.experiencePoints[MiningSkillNumber];
-                data.ForagingExperience = Game1.player.experiencePoints[ForagingSkillNumber];
-                data.FishingExperience = Game1.player.experiencePoints[FishingSkillNumber];
-                data.CombatExperience = Game1.player.experiencePoints[CombatSkillNumber];
-
-                this.Helper.Data.WriteJsonFile($"data/{Constants.SaveFolderName}.json", data);
-                Game1.player.setSkillLevel("Farming", 10);
-                Game1.player.setSkillLevel("Mining", 10);
-                Game1.player.setSkillLevel("Foraging", 10);
-                Game1.player.setSkillLevel("Fishing", 10);
-                Game1.player.setSkillLevel("Combat", 10);
-                ////////////////////////////////////////
                 IsEnabled = true;
                 Game1.chatBox.addInfoMessage("The Host is in Server Mode!");
                 this.Monitor.Log("Server Mode On!", LogLevel.Info);
             }
-
         }
-
         //debug for running with no one online
         private void DebugToggle(string command, string[] args)
         {
