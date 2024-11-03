@@ -82,10 +82,6 @@ namespace Always_On_Server
         SDate grampasGhost = new SDate(1, "spring", 3);
         ///////////////////////////////////////////////////////
 
-
-
-
-
         //variables for timeout reset code
 
         private int timeOutTicksForReset;
@@ -97,9 +93,6 @@ namespace Always_On_Server
         SDate danceOfJelliesForReset = new SDate(28, "summer");
         SDate spiritsEveForReset = new SDate(27, "fall");
         //////////////////////////
-
-
-
 
         public override void Entry(IModHelper helper)
         {
@@ -198,7 +191,6 @@ namespace Always_On_Server
                     Helper.ReadConfig<ModConfig>();
                     IsEnabled = true;
 
-
                     this.Monitor.Log("Server Mode On!", LogLevel.Info);
                     Game1.chatBox.addInfoMessage("The Host is in Server Mode!");
 
@@ -206,38 +198,7 @@ namespace Always_On_Server
                     Game1.addHUDMessage(new HUDMessage("Server Mode On!"));
 
                     Game1.options.pauseWhenOutOfFocus = false;
-
-
-                    // store levels, set in game levels to max
-                    var data = this.Helper.Data.ReadJsonFile<ModData>($"data/{Constants.SaveFolderName}.json") ?? new ModData();
-
-                    // Skill numbers
-                    int FarmingSkillNumber = Farmer.getSkillNumberFromName("farming");
-                    int MiningSkillNumber = Farmer.getSkillNumberFromName("mining");
-                    int ForagingSkillNumber = Farmer.getSkillNumberFromName("foraging");
-                    int FishingSkillNumber = Farmer.getSkillNumberFromName("fishing");
-                    int CombatSkillNumber = Farmer.getSkillNumberFromName("combat");
-
-                    // Levels
-                    data.FarmingLevel = Game1.player.FarmingLevel;
-                    data.MiningLevel = Game1.player.MiningLevel;
-                    data.ForagingLevel = Game1.player.ForagingLevel;
-                    data.FishingLevel = Game1.player.FishingLevel;
-                    data.CombatLevel = Game1.player.CombatLevel;
-
-                    //Experience
-                    data.FarmingExperience = Game1.player.experiencePoints[FarmingSkillNumber];
-                    data.MiningExperience = Game1.player.experiencePoints[MiningSkillNumber];
-                    data.ForagingExperience = Game1.player.experiencePoints[ForagingSkillNumber];
-                    data.FishingExperience = Game1.player.experiencePoints[FishingSkillNumber];
-                    data.CombatExperience = Game1.player.experiencePoints[CombatSkillNumber];
-
-                    this.Helper.Data.WriteJsonFile($"data/{Constants.SaveFolderName}.json", data);
-                    Game1.player.setSkillLevel("Farming", 10);
-                    Game1.player.setSkillLevel("Mining", 10);
-                    Game1.player.setSkillLevel("Foraging", 10);
-                    Game1.player.setSkillLevel("Fishing", 10);
-                    Game1.player.setSkillLevel("Combat", 10);
+                    
                     ///////////////////////////////////////////
                     Game1.addHUDMessage(new HUDMessage("Server Mode COMPLETE!"));
                     ///////////////////////////////////////////
@@ -252,32 +213,6 @@ namespace Always_On_Server
 
                     Game1.displayHUD = true;
                     Game1.addHUDMessage(new HUDMessage("Server Mode Off!"));
-
-                    //set player levels to stored levels
-
-                    // Skill numbers
-                    int FarmingSkillNumber = Farmer.getSkillNumberFromName("farming");
-                    int MiningSkillNumber = Farmer.getSkillNumberFromName("mining");
-                    int ForagingSkillNumber = Farmer.getSkillNumberFromName("foraging");
-                    int FishingSkillNumber = Farmer.getSkillNumberFromName("fishing");
-                    int CombatSkillNumber = Farmer.getSkillNumberFromName("combat");
-
-                    var data = this.Helper.Data.ReadJsonFile<ModData>($"data/{Constants.SaveFolderName}.json") ?? new ModData();
-
-                    // Set levels
-                    Game1.player.farmingLevel.Value = data.FarmingLevel;
-                    Game1.player.miningLevel.Value = data.MiningLevel;
-                    Game1.player.foragingLevel.Value = data.ForagingLevel;
-                    Game1.player.fishingLevel.Value = data.FishingLevel;
-                    Game1.player.combatLevel.Value = data.CombatLevel;
-
-                    // Set EXP
-                    Game1.player.experiencePoints[FarmingSkillNumber] = data.FarmingExperience;
-                    Game1.player.experiencePoints[MiningSkillNumber] = data.MiningExperience;
-                    Game1.player.experiencePoints[ForagingSkillNumber] = data.ForagingExperience;
-                    Game1.player.experiencePoints[FishingSkillNumber] = data.FishingExperience;
-                    Game1.player.experiencePoints[CombatSkillNumber] = data.CombatExperience;
-                    //////////////////////////////////////
                 }
             }
         }
